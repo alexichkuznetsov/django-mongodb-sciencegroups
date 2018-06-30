@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html>
+
+    <head>
+        <meta charset = 'utf-8'>
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+        {% load staticfiles %}
+        <link rel = 'stylesheet' href = "{% static 'lab/materialize.css' %}">
+        <script src = "{% static 'lab/materialize.js' %}"></script>
+    </head>
+
+    <body class = 'cyan grey lighten-5'>
+
+        <nav>
+            <div class = 'nav-wrapper cyan lighten-2'>
+                <div class="container">
+                    <ul>
+                        <li >
+                            <a href = "{% url 'index' %}" class = 'black-text'>
+                                Главная страница
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "{% url 'students' %}" class = 'black-text'>
+                                Студенты
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "{% url 'teachers' %}" class = 'black-text'>
+                                Преподаватели
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "{% url 'groups' %}" class = 'black-text'>
+                                Научные группы
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+    </body>
+
+</html>

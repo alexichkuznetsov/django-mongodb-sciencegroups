@@ -1,0 +1,61 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Научная группа
+{% endblock %}
+
+{% block content %}
+    {% load staticfiles %}
+<script src = "{% static 'lab/select-init.js' %}"></script>
+    <div class="container">
+        <div class="row">
+            <div class = 'section'>
+                <div class="col s6 offset-s3">
+                    <form method = 'post'>
+                        {% csrf_token %}
+
+                        <div class = 'input-field col s12'>
+                            <label for = "{{ form.group_id.id_for_label }}">
+                                Номер ИСУ
+                            </label>
+                            {{ form.group_id }}
+                        </div>
+                        <div class="input-field col s12">
+                            <label for = "{{ form.group_purpose.id_for_label">
+                                Назначение
+                            </label>
+                            {{ form.group_purpose }}
+                        </div>
+                        <div class="input-field col s12">
+                            <p>
+                                Руководитель
+                            </p>
+                            {{ form.teacher }}
+                        </div>
+                        <div class="input-field col s12">
+                            <p>
+                                Студенты
+                            </p>
+                            {{ form.student }}
+                        </div>
+
+                        {% with url_name=request.resolver_match.url_name %}
+
+                            <div class = 'input-field col s12'>
+                                <button type = 'submit' class = 'btn waves-effect waves-light cyan darken-1'>
+                                    {% if url_name == 'group-create' %}
+                                    Создать
+                                    {% elif url_name == 'group-edit' %}
+                                    Сохранить
+                                    {% endif %}
+                                </button>
+                            </div>
+
+                        {% endwith %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

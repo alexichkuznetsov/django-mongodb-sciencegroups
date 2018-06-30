@@ -1,0 +1,57 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Научная группа №{{ group.group_id }}
+{% endblock %}
+
+{% block content %}
+
+    <div class = 'container'>
+
+        <div class="row">
+
+            <div class="col s12">
+                <h5>
+                    Просмотр информации о группе №{{ group.group_id }}
+                </h5>
+            </div>
+
+            <div class="col s12">
+                <p>
+                    Руководитель: {{ group.teacher }}
+                </p>
+                <p>
+                    Назначение: {{ group.group_purpose }}
+                </p>
+                <p>
+                    Список студентов, входящих в группу
+                </p>
+                <table class = 'highlight'>
+                    <tr>
+                        <th>
+                            Номер ИСУ
+                        </th>
+                        <th>
+                            ФИО
+                        </th>
+                    </tr>
+                    {% for student in students %}
+
+                        <tr>
+                            <td>
+                                {{ student.student_id }}
+                            </td>
+                            <td>
+                                {{ student.last_name|add:" "|add:student.first_name|add:" "|add:student.middle_name }}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

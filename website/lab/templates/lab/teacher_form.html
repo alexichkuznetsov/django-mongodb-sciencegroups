@@ -1,0 +1,44 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Преподаватель
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class = 'section'>
+                <div class="col s6 offset-s3">
+                    <form method = 'post'>
+                        {% csrf_token %}
+
+                        {% for field in form.visible_fields %}
+
+                            <div class="input-field col s12">
+                                {{ field.label_tag }}
+                                {{ field }}
+                            </div>
+
+                        {% endfor %}
+
+                        {% with url_name=request.resolver_match.url_name %}
+
+                            <div class = 'input-field col s12'>
+                                <button type = 'submit' class = 'btn waves-effect waves-light cyan darken-1'>
+                                    {% if url_name == 'teacher-add' %}
+                                    Добавить
+                                    {% elif url_name == 'teacher-edit' %}
+                                    Сохранить
+                                    {% endif %}
+                                </button>
+                            </div>
+
+                        {% endwith %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

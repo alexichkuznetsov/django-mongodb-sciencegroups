@@ -1,0 +1,64 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Список студентов
+{% endblock %}
+
+{% block content %}
+
+    <div class = 'container'>
+        <div class = 'row'>
+            <div class = 'col s12'>
+                <h5>Список студентов</h5>
+                <a href = "{% url 'student-add' %}" class = 'waves-effect waves-light btn-flat right'>
+                    Добавить
+                </a>
+            </div>
+
+            <div class = 'col s12'>
+                <table class = 'highlight'>
+                    <tr>
+                        <th>
+                            Номер ИСУ
+                        </th>
+                        <th>
+                            ФИО
+                        </th>
+                        <th>
+                            Изменение
+                        </th>
+                        <th>
+                            Удаление
+                        </th>
+                    </tr>
+
+                    {% for student in students %}
+
+                        <tr>
+                            <td>
+                                {{ student.student_id }}
+                            </td>
+                            <td>
+                                {{ student.last_name|add:" "|add:student.first_name|add:" "|add:student.middle_name }}
+                            </td>
+                            <td>
+                                <a href = "{% url 'student-edit' student.student_id %}">
+                                    Изменить
+                                </a>
+                            </td>
+                            <td>
+                                <a href = "{% url 'student-delete' student.student_id %}">
+                                    Удалить
+                                </a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

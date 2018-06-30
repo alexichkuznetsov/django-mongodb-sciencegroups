@@ -1,0 +1,84 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Список научных групп
+{% endblock %}
+
+{% block content %}
+
+    <div class = 'container'>
+
+        <div class = 'row'>
+            {% if groups %}
+            <div class = 'col s12'>
+                <h5>
+                    Список научных групп
+                </h5>
+                <a href = "{% url 'group-create' %}" class = 'waves-effect waves-light btn-flat right'>
+                    Создать
+                </a>
+            </div>
+
+            <div class = 'col s12'>
+                <table class = 'highlight'>
+                    <tr>
+                        <th>
+                            Номер группы
+                        </th>
+                        <th>
+                            Руководитель
+                        </th>
+                        <th>
+                            Назначение
+                        </th>
+                        <th>
+                            Изменение
+                        </th>
+                        <th>
+                            Удаление
+                        </th>
+                    </tr>
+                    {% for group in groups %}
+
+                        <tr>
+                            <td>
+                                <a href = "{% url 'group-details' group.group_id %}">
+                                    {{ group.group_id }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ group.teacher }}
+                            </td>
+                            <td>
+                                {{ group.group_purpose }}
+                            </td>
+                            <td>
+                                <a href = "{% url 'group-edit' group.group_id %}">
+                                    Изменить
+                                </a>
+                            </td>
+                            <td>
+                                <a href = "{% url 'group-delete' group.group_id%}">
+                                    Удалить
+                                </a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+            {% else %}
+                <div class="col s12">
+                    <h5>
+                        В базе данных пока нет научных групп!
+                    </h5>
+                    <a href = "{% url 'group-create' %}" class = 'waves-effect waves-light btn left cyan'>
+                        Создать
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
